@@ -215,22 +215,24 @@ function getDevice(id) {
 function deviceOpenDoor(id) { processCommand(getDevice(id),'OpenDoor',false); }
 
 function processCommand(device, action, qsMode = true) {
-	if (device && action == "OpenDoor") {
-		const xhr = new XMLHttpRequest();
+	if (device) {
+		if (action == "OpenDoor") {
+			const xhr = new XMLHttpRequest();
 
-		var onErr = function () { alertDanger("Falha ao conectar no dispositivo", qsMode); };
-		var onComm = function () {
-			if (xhr.readyState == xhr.DONE) {
-				if (xhr.status == 200) {
-					if (xhr.response["code"] == 200) {
-						alertSuccess(`Comando enviado com sucesso (${device['name']} [${device['id']}]) {${xhr.response["info"]["Result"]}}`, qsMode);
-					} else { alertWarning(`Comando não aceito: ${xhr.response["info"]["Detail"]}`, qsMode); }
-				} else { alertDanger("Erro ao comunicar-se com o dispositivo (" + xhr.status + ")", qsMode); }
-			}
-		};
+			var onErr = function () { alertDanger("Falha ao conectar no dispositivo", qsMode); };
+			var onComm = function () {
+				if (xhr.readyState == xhr.DONE) {
+					if (xhr.status == 200) {
+						if (xhr.response["code"] == 200) {
+							alertSuccess(`Comando enviado com sucesso (${device['name']} [${device['id']}]) {${xhr.response["info"]["Result"]}}`, qsMode);
+						} else { alertWarning(`Comando não aceito: ${xhr.response["info"]["Detail"]}`, qsMode); }
+					} else { alertDanger("Erro ao comunicar-se com o dispositivo (" + xhr.status + ")", qsMode); }
+				}
+			};
 
-		httpRequest(xhr, `http://${device.host}:${device.port}${DEF_URI_PATH}${endpoints['opendoor']}`,onErr, onComm, btoa(`${device.user}:${device.passwd}`),`{"operator": "${action}","info": {"DeviceID": "${device.id}","Chn": 0}}`);
-	} else { alertWarning("Comando desconhecido", qsMode); }
+			httpRequest(xhr, `http://${device.host}:${device.port}${DEF_URI_PATH}${endpoints['opendoor']}`,onErr, onComm, btoa(`${device.user}:${device.passwd}`),`{"operator": "${action}","info": {"DeviceID": "${device.id}","Chn": 0}}`);
+		} else { alertWarning("Comando desconhecido", qsMode); }
+	} else { alertWarning("Dispositivo não encontrado", qsMode); }
 }
 
 function addToFav(deviceId, title) {
