@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+	<title>Avicam : Gerenciador de Leitores Faciais</title>
+	<link rel="icon" type="image/x-icon" href="img/favicon.png">
+	<link rel="stylesheet" href="css/pure-min.css">
+	<link rel="stylesheet" href="css/alerts-css.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="layout">
+	<!-- Menu toggle -->
+	<a href="#menu" id="menuLink" class="menu-link"><span></span></a>
+
+	<div id="menu">
+		<div class="pure-menu">
+			<a class="pure-menu-heading" href="https://avicam.com.br" target="_blank">Avicam</a>
+			<ul class="pure-menu-list">
+				<li class="pure-menu-item"><a href="index.html" class="pure-menu-link">Painel</a></li>
+				<li class="pure-menu-item menu-item-divided"><a href="https://github.com/daleffe" target="_blank" class="pure-menu-link">@daleffe</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="main">
+		<div class="header">
+			<h1>Avicam</h1>
+			<h2>Painel</h2>
+		</div>
+
+		<div class="content">
+			<div id="alert-main" class="container-alert" style="display: none;">
+				<div class="alert" style="margin-top: 1rem; animation-delay: .1s"><div class="alert--content"></div></div>
+			</div>
+
+			<h2 class="content-subhead">Portas</h2>
+			<p id="content-doors">
+				<div id="alert-doors" style="display: none" class="container-alert"><div class="alert alert_info" style="animation-delay: .1s"><div class="alert--content">Nenhuma porta cadastrada</div></div></div>
+					<table id="list-devices" class="pure-table" style="display: none">
+					<thead><tr><th>Dispositivo</th><th>Comandos</th><th>Ações</th></tr></thead>
+					<tbody></tbody>
+				</table>
+			</p>
+
+			<h2 class="content-subhead">Adicionar</h2>
+			<p id="content-crud">
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-name">Nome</label>
+							<input type="text" id="aligned-name" placeholder="Nome" />
+							<span id="aligned-name-required" style="display: none" class="pure-form-message-inline">Nome obrigatório</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-host">IP / DNS</label>
+							<input type="text" id="aligned-host" placeholder="IP / DNS" />
+							<span id="aligned-host-required" style="display: none" class="pure-form-message-inline">IP / DNS obrigatório</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-port">Porta</label>
+							<input type="number" id="aligned-port" placeholder="Porta" value="80" min="1" max="65535" />
+							<span id="aligned-port-required" style="display: none" class="pure-form-message-inline">Porta obrigatória</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-user">Usuário</label>
+							<input type="text" id="aligned-user" placeholder="Usuário" value="admin" />
+							<span id="aligned-user-required" style="display: none" class="pure-form-message-inline">Usuário obrigatória</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-passwd">Senha</label>
+							<input type="password" id="aligned-passwd" placeholder="Senha" value="admin" />
+							<span id="aligned-passwd-required" style="display: none" class="pure-form-message-inline">Senha obrigatória</span>
+						</div>
+						<div class="pure-controls">
+							<button id="crud-submit" type="submit" class="pure-button pure-button-primary">Salvar</button>
+							<button type="reset" class="pure-button pure-button-secondary">Limpar</button>
+						</div>
+					</fieldset>
+				</form>
+			</p>
+		</div>
+	</div>
+</div>
+
+<script src="js/alerts.min.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
