@@ -12,6 +12,9 @@ Foram utilizadas os seguintes _frameworks_/bibliotecas visuais:
 ## API
 Foi desenvolvido um recurso para permitir que seja salvo um _link_ (por dispositivo) nos favoritos, para fazer a abertura direta da porta, sem a necessidade de acessar a interface de gerenciamento.
 
+## Demonstração
+A [página de demonstração](https://daleffe.github.io/avicam-face-manager/) serve apenas para visualização da estrutura, pois, como os faciais usam o protocolo HTTP e a página está hospedada em ambiente HTTPS, as requisições não são processadas adequadamente. Para testar adequadamente, baixe para sua máquina local e distribua a aplicação via rede, caso julgue necessário, via servidor web.
+
 ## Recursos
 - [X] Enviar comando de abertura de porta
 - [X] Gerar um link por dispositivo
