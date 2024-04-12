@@ -14,7 +14,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const qParams = new URLSearchParams(window.location.search);
 	const qKeys = new Set([qParamDeviceId,qParamAction]);
 
-	if ([...qKeys].every(qKey => qParams.has(qKey))) processCommand(getDevice(qParams.get(qParamDeviceId)),qParams.get(qParamAction));
+	if ([...qKeys].every(qKey => qParams.has(qKey))) {
+		processCommand(getDevice(qParams.get(qParamDeviceId)),qParams.get(qParamAction));
+		// A maioria dos navegdores não permite, mas vamos deixar aqui para efeitos de documentação
+		window.close();
+	}
 });
 
 window.addEventListener('load', () => {
@@ -251,12 +255,28 @@ function addToFav(deviceId, title) {
 }
 
 function copyToClipboard(url, title) {
+	// Ajustado para, primeiramente, tentar executar com a função assíncrona, mais atual,
+	// caso contrário, faz no modo bruto, rústico e sistemático.
+	if (navigator.clipboard) {
 	navigator.clipboard.writeText(url).then(() => {
-    alertSuccess(`Atalho copiado para a área de transferência (${title})"`);
-  }).catch((error) => {
-		alertWarning(`Não foi possível copiar o atalho para a área de transferência (${title})`);
-    console.error('Falha ao copiar texto para a área de transferência:', error);
-  });
+			alertSuccess(`Atalho copiado para a área de transferência (${title})"`);
+		}).catch((error) => {
+			alertWarning(`Não foi possível copiar o atalho para a área de transferência (${title})`);
+			console.error('Falha ao copiar texto para a área de transferência:', error);
+		});
+	} else {
+		const input = document.createElement('input');
+		input.setAttribute('value', url);
+		document.body.appendChild(input);
+
+		input.select();
+		input.setSelectionRange(0, 99999);
+
+		document.execCommand('copy');
+		document.body.removeChild(input);
+
+		alertSuccess(`Atalho copiado para a área de transferência (${title})"`);
+	}
 }
 
 var alertDanger = function(message, native = false) { showAlert(message, 'danger', native ? '' : 'main'); }
