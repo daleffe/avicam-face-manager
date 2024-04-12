@@ -19,6 +19,7 @@ A [página de demonstração](https://daleffe.github.io/avicam-face-manager/) se
 - [X] Enviar comando de abertura de porta
 - [X] Gerar um link por dispositivo
 - [ ] Permitir a edição de dispositivos
+- [ ] Integrar a visualização do vídeo via RTSP
 - [ ] Multi-idiomas
 - [ ] Migrar para o AngularJS (_sim, só pra brincar..._)
 - [ ] Converter em extensão para Chrome/Edge/Chromium-based
